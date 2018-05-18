@@ -2,7 +2,6 @@ package com.dimazatolokin.films.view.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +34,10 @@ public class FilmInfoFragment extends Fragment implements FilmInfoView{
     private TextView tvReleaseYear;
     private FilmInfoPresenter presenter;
 
-    public static FilmInfoFragment getInstance(Film film) {
+    public static FilmInfoFragment getInstance(String title) {
         FilmInfoFragment fragment = new FilmInfoFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_FILM, film);
+        bundle.putString(KEY_FILM, title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,14 +61,13 @@ public class FilmInfoFragment extends Fragment implements FilmInfoView{
         tvRating = view.findViewById(R.id.tvRating);
         tvReleaseYear = view.findViewById(R.id.tvReleaseYear);
 
-        Parcelable parcelable = getArguments().getParcelable(KEY_FILM);
-        if (parcelable == null) {
-            getActivity().onBackPressed();
-        }
-        Film film = (Film) parcelable;
-        presenter.setFilm(film);
+        String title = getArguments().getString(KEY_FILM);
+        presenter.setFilmId(title);
 
-        setViewFilds(film);
+        Film film = presenter.getFilm();
+        if (film != null) {
+            setViewFilds(film);
+        }
     }
 
     private void setViewFilds(Film film) {

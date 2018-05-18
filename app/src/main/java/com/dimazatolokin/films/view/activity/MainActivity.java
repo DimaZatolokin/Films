@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void openFilmInfo(Film film) {
         getFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .add(android.R.id.content, FilmInfoFragment.getInstance(film))
+                .add(android.R.id.content, FilmInfoFragment.getInstance(film.getTitle()))
                 .commit();
     }
 

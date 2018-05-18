@@ -67,7 +67,7 @@ public class FilmsDao {
     public void save(Film film) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE, film.getTitle());
-        contentValues.put(COLUMN_IMAGE,film.getImage());
+        contentValues.put(COLUMN_IMAGE, film.getImage());
         contentValues.put(COLUMN_RATING, film.getRating());
         contentValues.put(COLUMN_RELEASE_YEAR, film.getReleaseYear());
         contentValues.put(COLUMN_GENRE, Utils.genresFromListToStr(film.getGenres()));
@@ -76,6 +76,35 @@ public class FilmsDao {
     }
 
     public void clear() {
-        sqLiteDatabase.delete(TABLE_NAME,  null, null);
+        sqLiteDatabase.delete(TABLE_NAME, null, null);
+    }
+
+    public Film getFilm(String title) {
+        Cursor cursor = null;
+        try {
+            cursor = sqLiteDatabase.query(TABLE_NAME, null, COLUMN_TITLE + " = ?",
+                    new String[]{title}, null, null, null);
+            if (cursor.moveToFirst()) {
+                final int columnIdIndex = cursor.getColumnIndex(COLUMN_ID);
+                final int columnTitleIndex = cursor.getColumnIndex(COLUMN_TITLE);
+                final int columnImageIndex = cursor.getColumnIndex(COLUMN_IMAGE);
+                final int columnRatingIndex = cursor.getColumnIndex(COLUMN_RATING);
+                final int columnReleaseYearIndex = cursor.getColumnIndex(COLUMN_RELEASE_YEAR);
+                final int columnGenreIndex = cursor.getColumnIndex(COLUMN_GENRE);
+                Film film = new Film(
+                        cursor,
+                        columnTitleIndex,
+                        columnImageIndex,
+                        columnRatingIndex,
+                        columnReleaseYearIndex,
+                        columnGenreIndex);
+                return film;
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
     }
 }
