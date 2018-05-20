@@ -47,4 +47,9 @@ public class FilmInfoPresenter implements BasePresenter {
         Film film = repository.getDaoSession().getFilmsDao().getFilm(title);
         this.film = film;
     }
+
+    public void setInBookmark(boolean inBookmark) {
+        film.setInBookmark(inBookmark);
+        repository.getDaoSession().getFilmsDao().save(film);
+    }
 }

@@ -4,6 +4,9 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -45,6 +48,7 @@ public class FilmInfoFragment extends Fragment implements FilmInfoView{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_film_info, container, false);
     }
 
@@ -90,5 +94,33 @@ public class FilmInfoFragment extends Fragment implements FilmInfoView{
         super.onDestroy();
 
         presenter.detachView();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.info_menu, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.getItem(0);
+        if (presenter.getFilm() != null && presenter.getFilm().isInBookmark()) {
+            item.setIcon(R.drawable.baseline_turned_in_24);
+        } else {
+            item.setIcon(R.drawable.baseline_turned_in_not_24);
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.bookmark:
+                presenter.setInBookmark(!presenter.getFilm().isInBookmark());
+                getActivity().invalidateOptionsMenu();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

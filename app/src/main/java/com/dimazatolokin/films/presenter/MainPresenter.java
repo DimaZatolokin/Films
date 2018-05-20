@@ -22,7 +22,6 @@ public class MainPresenter implements BasePresenter {
     private static final String TAG = MainPresenter.class.getSimpleName();
     private MainView view;
     private String viewTag;
-   // private Repository repository;
     private List<Film> films = new ArrayList<>();
 
     public MainPresenter() {
@@ -33,7 +32,6 @@ public class MainPresenter implements BasePresenter {
     public void attachView(BaseView view) {
         this.view = (MainView) view;
         viewTag = view.getViewTag();
-       // repository = FilmsApp.getInstance().getRepository();
         this.view.showProgress();
         repository.getNetworkService().getFilms(new GetFilmsCallbackImpl());
     }
@@ -83,6 +81,7 @@ public class MainPresenter implements BasePresenter {
         public void onSuccess(List<Film> films) {
             Log.i(TAG, "onSuccess: ");
             view.hideProgress();
+            repository.getDaoSession().getFilmsDao().saveAll(films);
             displayItems(films);
         }
 

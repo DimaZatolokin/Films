@@ -1,15 +1,13 @@
 package com.dimazatolokin.films.model.models;
 
 import android.database.Cursor;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import com.dimazatolokin.films.Utils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Film implements Parcelable {
+public class Film {
 
     @SerializedName("title")
     private String title;
@@ -20,46 +18,29 @@ public class Film implements Parcelable {
     @SerializedName("releaseYear")
     private int releaseYear;
     @SerializedName("genre")
-    List<String> genres;
+    private List<String> genres;
+    private boolean isInBookmark;
 
-    public Film(String title, String image, double rating, int releaseYear, List<String> genres) {
+    public Film(String title, String image, double rating, int releaseYear, List<String> genres, boolean isInBookmark) {
         this.title = title;
         this.image = image;
         this.rating = rating;
         this.releaseYear = releaseYear;
         this.genres = genres;
+        this.isInBookmark = isInBookmark;
     }
 
     public Film() {
     }
 
-    public Film(Cursor cursor, int columnTitleIndex, int columnImageIndex, int columnRatingIndex, int columnReleaseYearIndex, int columnGenreIndex) {
+    public Film(Cursor cursor, int columnTitleIndex, int columnImageIndex, int columnRatingIndex, int columnReleaseYearIndex, int columnGenreIndex, int columnInBookmarkIndex) {
         this(cursor.getString(columnTitleIndex),
                 cursor.getString(columnImageIndex),
                 cursor.getDouble(columnRatingIndex),
                 cursor.getInt(columnReleaseYearIndex),
-                Utils.genresFromStrToList(cursor.getString(columnGenreIndex)));
+                Utils.genresFromStrToList(cursor.getString(columnGenreIndex)),
+                cursor.getInt(columnInBookmarkIndex) == 1);
     }
-
-    protected Film(Parcel in) {
-        title = in.readString();
-        image = in.readString();
-        rating = in.readDouble();
-        releaseYear = in.readInt();
-        genres = in.createStringArrayList();
-    }
-
-    public static final Creator<Film> CREATOR = new Creator<Film>() {
-        @Override
-        public Film createFromParcel(Parcel in) {
-            return new Film(in);
-        }
-
-        @Override
-        public Film[] newArray(int size) {
-            return new Film[size];
-        }
-    };
 
     public String getTitle() {
         return title;
@@ -101,17 +82,11 @@ public class Film implements Parcelable {
         this.genres = genres;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean isInBookmark() {
+        return isInBookmark;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getTitle());
-        dest.writeString(getImage());
-        dest.writeDouble(getRating());
-        dest.writeInt(getReleaseYear());
-        dest.writeList(getGenres());
+    public void setInBookmark(boolean inBookmark) {
+        isInBookmark = inBookmark;
     }
 }

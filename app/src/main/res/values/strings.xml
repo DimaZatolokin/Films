@@ -3,4 +3,5 @@
     <string name="refresh_films">Refresh</string>
     <string name="rating">Rating:</string>
     <string name="genre">Genre:</string>
+    <string name="bookmark">Bookmark</string>
 </resources>
