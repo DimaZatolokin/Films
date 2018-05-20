@@ -9,7 +9,9 @@ import com.dimazatolokin.films.Utils;
 import com.dimazatolokin.films.model.models.Film;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FilmsDao {
 
@@ -128,5 +130,39 @@ public class FilmsDao {
             }
         }
         return null;
+    }
+
+    public Set<String> getBookmarksTitles() {
+        Set<String> filmsTitles = new HashSet<>();
+        Cursor cursor = null;
+        try {
+            cursor = sqLiteDatabase.query(TABLE_NAME, null, COLUMN_IS_IN_BOOKMARK + " = ?",
+                    new String[]{"1"}, null, null, null);
+            if (cursor.moveToFirst()) {
+                final int columnIdIndex = cursor.getColumnIndex(COLUMN_ID);
+                final int columnTitleIndex = cursor.getColumnIndex(COLUMN_TITLE);
+                final int columnImageIndex = cursor.getColumnIndex(COLUMN_IMAGE);
+                final int columnRatingIndex = cursor.getColumnIndex(COLUMN_RATING);
+                final int columnReleaseYearIndex = cursor.getColumnIndex(COLUMN_RELEASE_YEAR);
+                final int columnGenreIndex = cursor.getColumnIndex(COLUMN_GENRE);
+                final int columnInBookmarkIndex = cursor.getColumnIndex(COLUMN_IS_IN_BOOKMARK);
+                do {
+                    Film film = new Film(
+                            cursor,
+                            columnTitleIndex,
+                            columnImageIndex,
+                            columnRatingIndex,
+                            columnReleaseYearIndex,
+                            columnGenreIndex,
+                            columnInBookmarkIndex);
+                    filmsTitles.add(film.getTitle());
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return filmsTitles;
     }
 }

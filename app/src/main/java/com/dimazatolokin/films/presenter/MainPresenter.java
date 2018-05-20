@@ -11,6 +11,7 @@ import com.dimazatolokin.films.view.views.MainView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -62,6 +63,10 @@ public class MainPresenter implements BasePresenter {
             items = getFilmsFromStorage();
         } else {
             items = films;
+        }
+        Set<String> bookmarksTitles = repository.getDaoSession().getFilmsDao().getBookmarksTitles();
+        for (Film film : items) {
+            film.setInBookmark(bookmarksTitles.contains(film.getTitle()));
         }
         view.displayFilms(items);
         this.films = items;

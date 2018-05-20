@@ -136,4 +136,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public String getViewTag() {
         return MainActivity.class.getSimpleName();
     }
+
+    @Override
+    public void onBackPressed() {
+        int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount > 0) {
+            presenter.refresh();
+        }
+        super.onBackPressed();
+    }
 }

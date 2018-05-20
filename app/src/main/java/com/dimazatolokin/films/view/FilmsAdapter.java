@@ -63,6 +63,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.VH> {
         private TextView tvTitle;
         private TextView tvGenre;
         private View cardItemBox;
+        private ImageView imgBookmark;
 
         public VH(View itemView) {
             super(itemView);
@@ -73,6 +74,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.VH> {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvGenre = itemView.findViewById(R.id.tvGenre);
             cardItemBox = itemView.findViewById(R.id.cardItemBox);
+            imgBookmark = itemView.findViewById(R.id.imgBookmark);
         }
 
         public void apply(final int position) {
@@ -92,6 +94,8 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.VH> {
                     clickListener.onItemClick(position);
                 }
             });
+            imgBookmark.setImageDrawable(context.getDrawable(film.isInBookmark() ?
+                    R.drawable.baseline_turned_in_24 : R.drawable.baseline_turned_in_not_24));
         }
     }
 
