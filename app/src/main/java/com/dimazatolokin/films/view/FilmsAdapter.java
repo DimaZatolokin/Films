@@ -23,8 +23,11 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.VH> {
     private List<Film> items = new ArrayList<>();
     private OnItemClickListener clickListener;
 
-    public FilmsAdapter(Context context, OnItemClickListener clickListener) {
+    public FilmsAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
     }
 

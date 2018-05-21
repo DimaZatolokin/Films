@@ -6,5 +6,5 @@
         android:id="@+id/bookmark"
         android:icon="@drawable/baseline_turned_in_not_24"
         android:title="@string/bookmark"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

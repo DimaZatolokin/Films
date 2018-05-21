@@ -4,4 +4,20 @@
     <string name="rating">Rating:</string>
     <string name="genre">Genre:</string>
     <string name="bookmark">Bookmark</string>
+    <string name="filter">Filter</string>
+    <string name="byRating">by rating</string>
+    <string name="byReleaseYear">by release year</string>
+    <string name="byGenre">by genre</string>
+    <string name="genre_action">Action</string>
+    <string name="genre_drama">Drama</string>
+    <string name="genre_sci_fi">Sci-Fi</string>
+    <string name="genre_thriller">Thriller</string>
+    <string name="genre_adventure">Adventure</string>
+    <string name="genre_history">History</string>
+    <string name="genre_fantasy">Fantasy</string>
+    <string name="genre_animation">Animation</string>
+    <string name="genre_comedy">Comedy</string>
+    <string name="genre_family">Family</string>
+    <string name="genre_horror">Horror</string>
+    <string name="genre_crime">Crime</string>
 </resources>

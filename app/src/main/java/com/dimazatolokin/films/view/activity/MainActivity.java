@@ -48,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setRefreshing(false);
         progressBar = findViewById(R.id.progressBar);
+        adapter = new FilmsAdapter(this);
         presenter = presenterManager.getMainPresenter(this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new FilmsAdapter(this, new FilmsAdapter.OnItemClickListener() {
+        adapter.setClickListener(new FilmsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 presenter.itemClicked(position);
@@ -69,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
@@ -81,6 +81,49 @@ public class MainActivity extends AppCompatActivity implements MainView {
             case R.id.showFilms:
                 presenter.refresh();
                 break;
+            case R.id.byRating:
+                presenter.filterItems(MainPresenter.Filter.RATING, this);
+                break;
+            case R.id.byReleaseYear:
+                presenter.filterItems(MainPresenter.Filter.RELEASE_YEAR, this);
+                break;
+            case R.id.genre_action:
+                presenter.filterItems(MainPresenter.Filter.GENRE_ACTION, this);
+                break;
+            case R.id.genre_adventure:
+                presenter.filterItems(MainPresenter.Filter.GENRE_ADVENTURE, this);
+                break;
+            case R.id.genre_animation:
+                presenter.filterItems(MainPresenter.Filter.GENRE_ANIMATION, this);
+                break;
+            case R.id.genre_comedy:
+                presenter.filterItems(MainPresenter.Filter.GENRE_COMEDY, this);
+                break;
+            case R.id.genre_crime:
+                presenter.filterItems(MainPresenter.Filter.GENRE_CRIME, this);
+                break;
+            case R.id.genre_drama:
+                presenter.filterItems(MainPresenter.Filter.GENRE_DRAMA, this);
+                break;
+            case R.id.genre_family:
+                presenter.filterItems(MainPresenter.Filter.GENRE_FAMILY, this);
+                break;
+            case R.id.genre_fantasy:
+                presenter.filterItems(MainPresenter.Filter.GENRE_FANTASY, this);
+                break;
+            case R.id.genre_history:
+                presenter.filterItems(MainPresenter.Filter.GENRE_HISTORY, this);
+                break;
+            case R.id.genre_horror:
+                presenter.filterItems(MainPresenter.Filter.GENRE_HORROR, this);
+                break;
+            case R.id.genre_sci_fi:
+                presenter.filterItems(MainPresenter.Filter.GENRE_SCI_FI, this);
+                break;
+            case R.id.genre_thriller:
+                presenter.filterItems(MainPresenter.Filter.GENRE_THRILLER, this);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

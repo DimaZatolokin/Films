@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/showFilms"
-        android:title="@string/refresh_films"/>
-<!--
-    <item android:id="@+id/clearFilmsDb"
-        android:title="clear"/>
+        android:title="@string/refresh_films"
+        android:icon="@drawable/baseline_cached_24"
+        app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/loadFilms"
-        android:title="load films"/>-->
+    <item android:id="@+id/filter"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/baseline_swap_vert_24">
+
+        <menu>
+
+            <item android:id="@+id/byRating"
+                android:title="@string/byRating"/>
+            <item android:id="@+id/byReleaseYear"
+                android:title="@string/byReleaseYear"/>
+            <item android:id="@+id/byGenre"
+                android:title="@string/byGenre" >
+
+                <menu>
+
+                    <item android:id="@+id/genre_action"
+                        android:title="@string/genre_action"/>
+                    <item android:id="@+id/genre_drama"
+                        android:title="@string/genre_drama"/>
+                    <item android:id="@+id/genre_sci_fi"
+                        android:title="@string/genre_sci_fi"/>
+                    <item android:id="@+id/genre_thriller"
+                        android:title="@string/genre_thriller"/>
+                    <item android:id="@+id/genre_adventure"
+                        android:title="@string/genre_adventure"/>
+                    <item android:id="@+id/genre_history"
+                        android:title="@string/genre_history"/>
+                    <item android:id="@+id/genre_fantasy"
+                        android:title="@string/genre_fantasy"/>
+                    <item android:id="@+id/genre_animation"
+                        android:title="@string/genre_animation"/>
+                    <item android:id="@+id/genre_comedy"
+                        android:title="@string/genre_comedy"/>
+                    <item android:id="@+id/genre_family"
+                        android:title="@string/genre_family"/>
+                    <item android:id="@+id/genre_horror"
+                        android:title="@string/genre_horror"/>
+                    <item android:id="@+id/genre_crime"
+                        android:title="@string/genre_crime"/>
+
+                </menu>
+
+            </item>
+
+        </menu>
+    </item>
 </menu>
