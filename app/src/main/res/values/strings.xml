@@ -20,4 +20,5 @@
     <string name="genre_family">Family</string>
     <string name="genre_horror">Horror</string>
     <string name="genre_crime">Crime</string>
+    <string name="connection_error">Connection error</string>
 </resources>

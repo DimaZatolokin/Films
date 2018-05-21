@@ -1,10 +1,10 @@
 package com.dimazatolokin.films.view.views;
 
-/**
- * Created by dimazatolokin on 17.05.18.
- */
+import android.support.annotation.StringRes;
 
 public interface MessageView {
 
     void showMessage(String message);
+
+    void showMessage(@StringRes int stringRes);
 }

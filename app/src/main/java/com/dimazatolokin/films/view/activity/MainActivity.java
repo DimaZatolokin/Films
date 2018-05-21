@@ -1,6 +1,7 @@
 package com.dimazatolokin.films.view.activity;
 
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.showFilms:
+                adapter.clear();
                 presenter.refresh();
                 break;
             case R.id.byRating:
@@ -140,7 +142,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showMessage(String message) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showMessage(int stringRes) {
+        Snackbar.make(findViewById(android.R.id.content), stringRes, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

@@ -171,6 +171,7 @@ public class MainPresenter implements BasePresenter {
         public void onFailure(String message) {
             Log.d(TAG, "onFailure: ");
             view.hideProgress();
+            view.showMessage(R.string.connection_error);
             setAndDisplayItems(null);
         }
     }
